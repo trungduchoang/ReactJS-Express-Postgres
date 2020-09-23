@@ -3,12 +3,8 @@ import "dotenv/config"; // Make env vars available // Deploy need its all .env
 import express from "express";
 import cors from "cors";
 // others
-import { serveApi } from "./serveApi";
-import { database } from "./models";
-import {
-  reinitializeDBOnServerStart,
-  createUsersWithMessages,
-} from "./dataSources";
+import { serveApi } from "./api";
+import database from "./database";
 
 const app = express();
 
@@ -21,12 +17,8 @@ app.use(cors());
 
 serveApi(app);
 
-database.sync({ force: reinitializeDBOnServerStart }).then(() => {
-  if (reinitializeDBOnServerStart) {
-    createUsersWithMessages();
-  }
-
+database.sync().then(() => {
   app.listen(process.env.PORT, () => {
-    console.log(`Example app listening on port ${process.env.PORT}!`);
+    console.log(`App is listening on port ${process.env.PORT}!`);
   });
 });
