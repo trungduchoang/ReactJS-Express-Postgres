@@ -1,10 +1,11 @@
 // libs
 import "dotenv/config"; // Make env vars available // Deploy need its all .env
+import "module-alias/register"; // Working aliases
 import express from "express";
 import cors from "cors";
 // others
-import { serveApi } from "./api";
-import database from "./database";
+import { serveApi } from "@/api";
+import database from "@/database";
 
 const app = express();
 
