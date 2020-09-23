@@ -4,7 +4,7 @@ import express from "express";
 import cors from "cors";
 // others
 import { serveApi } from "./serveApi";
-import { sequelize } from "./models";
+import { database } from "./models";
 import {
   reinitializeDBOnServerStart,
   createUsersWithMessages,
@@ -21,7 +21,7 @@ app.use(cors());
 
 serveApi(app);
 
-sequelize.sync({ force: reinitializeDBOnServerStart }).then(() => {
+database.sync({ force: reinitializeDBOnServerStart }).then(() => {
   if (reinitializeDBOnServerStart) {
     createUsersWithMessages();
   }

@@ -1,5 +1,5 @@
-const user = (sequelize, DataTypes) => {
-  const User = sequelize.define("user", {
+const user = (database, DataTypes) => {
+  const User = database.define("user", {
     username: {
       type: DataTypes.STRING,
       unique: true,
